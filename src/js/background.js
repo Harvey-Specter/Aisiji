@@ -68,7 +68,9 @@ function processTask(standerTime) {
                                 }
                             });
                         }
-                        if((new Date(tasks[i].killTime) - standerTime) >= 0 && (new Date(tasks[i].killTime) - standerTime) <= 600){
+                        // if((new Date(tasks[i].killTime) - standerTime) >= 0 && (new Date(tasks[i].killTime) - standerTime) <= 600){
+                        console.log((new Date(tasks[i].killTime) - standerTime))
+                        if((new Date(tasks[i].killTime) - standerTime) >= -864000){
                             //异步执行点击事件
                             var task = tasks[i];
                             var tabId = null;
@@ -92,7 +94,7 @@ function processTask(standerTime) {
                 }
             }
         });
-    }, 2000);
+    }, 5000);
     if(oldTimer != null) {
         clearInterval(oldTimer);
     }

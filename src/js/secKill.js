@@ -49,8 +49,8 @@ function dealTask(task) {
         //     });
         // }
         location.reload();
-        var mainTitle = $("main-title")
-        if(mainTitle&&mainTitle.html().indexOf('Hoppla')>=0){
+        var mainTitle = $("main-title") 
+        if(mainTitle && mainTitle.html().indexOf('Hoppla')>=0 ||mainTitle.html().indexOf('Abrakadabra')>=0  ){ //
             console.log('oops')
         }else{
             console.log('ok')
