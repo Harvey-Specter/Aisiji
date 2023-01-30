@@ -39,14 +39,21 @@ function getElementsByXPath(STR_XPATH) {
 function dealTask(task) {
     var count = 1;
     var timer = setInterval(function () {
-        if(task.selector == "jQuery") {
-            $(task.location).each(function(){
-                this.click();
-            });
-        } else {
-            $(getElementsByXPath(task.location)).each(function(){
-                this.click();
-            });
+        // if(task.selector == "jQuery") {
+        //     $(task.location).each(function(){
+        //         this.click();
+        //     });
+        // } else {
+        //     $(getElementsByXPath(task.location)).each(function(){
+        //         this.click();
+        //     });
+        // }
+        location.reload();
+        var mainTitle = $("main-title")
+        if(mainTitle&&mainTitle.html().indexOf('Hoppla')>=0){
+            console.log('oops')
+        }else{
+            console.log('ok')
         }
         count++;
         if(count>task.count) {

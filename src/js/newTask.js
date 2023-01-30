@@ -135,6 +135,10 @@
         // killTask.selector = $("#secKillForm input[name=selector]:checked").val();
         // killTask.location = location;
         killTask.killTime = $("#secKillForm #killTime").val();
+
+        var standerTime = new Date().getTime();
+        console.log('new Date(tasks[i].killTime).getTime() - standerTime====',new Date(killTask.killTime).getTime()-standerTime)
+
         killTask.frequency = $("#secKillForm #frequency").val();
         if($("#secKillForm #frequency").val() < 1000) {
             alert("秒杀频率最小值：1000");

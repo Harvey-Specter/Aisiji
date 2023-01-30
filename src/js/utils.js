@@ -73,7 +73,8 @@ $(document).ready(function () {
                 $(card).find("span[datafld='frequency']").text(tasks[i].frequency);
                 $(card).find("span[datafld='count']").text(tasks[i].count);
                 $(card).find(".footer ul").attr("id", tasks[i].id);
-                if(new Date(tasks[i].killTime).getTime() - standerTime <= 0) {
+                // console.log('new Date(tasks[i].killTime).getTime() - standerTime====',new Date(tasks[i].killTime).getTime() - 86400)
+                if(new Date(tasks[i].killTime).getTime() - standerTime <= -86400000) {
                     tasks[i].status  = 2; //已过期
                 }
                 var statusText = "运行中";
@@ -134,7 +135,7 @@ $(document).ready(function () {
                 currentTask.killTime = $(contentDiv).find("input[name='killTime']").val();
                 currentTask.frequency = $(contentDiv).find("input[name='frequency']").val();
                 currentTask.count = $(contentDiv).find("input[name='count']").val();
-                if(new Date(currentTask.killTime).getTime() - standerTime <= 0) {
+                if(new Date(currentTask.killTime).getTime() - standerTime <= 864000) {
                     currentTask.status = 2; //已过期
                 } else {
                     currentTask.status = 1; //已暂停
