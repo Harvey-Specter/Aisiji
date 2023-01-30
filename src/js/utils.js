@@ -5,6 +5,8 @@ $(document).ready(function () {
     var standerTime = new Date().getTime();
     updateTime(standerTime+fastTime);
     $("#standTime").text(formatDateTime(standerTime));
+
+    console.log(10000)
     //标题长度限制
     var titleLength = 17;
 
@@ -21,6 +23,7 @@ $(document).ready(function () {
             chrome.tabs.executeScript(tabs[0].id, { file: 'js/newTask.js'});
         });
     });
+    console.log(10950)
 
     //关闭窗口
     $("#close").click(function () {
@@ -42,9 +45,11 @@ $(document).ready(function () {
     $("#calibration").click(function () {
         getServerTimeAndUpdate();
     });
+    console.log(10100)
 
     //加载任务列表数据
     chrome.storage.local.get({"tasks": new Array()}, function(value){
+        console.log('chrome.storage.local.get====');
         tasks = value.tasks;
         console.log(tasks);
         if(tasks.length > 0) {
@@ -54,14 +59,14 @@ $(document).ready(function () {
                 $(card).find(".taskContainer").removeAttr("id");
                 $(card).find(".taskContainer").css("display","block");
                 //重置标题
-                $(card).find("span[datafld='name']").text(tasks[i].name.length > titleLength? tasks[i].name.substr(0, titleLength)+"..." : tasks[i].name);
+                $(card).find("span[datafld='name']").text('Search: '+tasks[i].name.length > titleLength? tasks[i].name.substr(0, titleLength)+"..." : tasks[i].name);
                 $(card).find("span[datafld='name']").attr("taskId", tasks[i].id);
                 $(card).find("span[datafld='name']").attr("title", tasks[i].name);
-                $(card).find("span[datafld='url']").text(tasks[i].url.length > urlLength? tasks[i].url.substr(0, urlLength)+"..." : tasks[i].url);
-                $(card).find("span[datafld='url']").attr("title", tasks[i].url);
-                $(card).find("span[datafld='selector']").text(tasks[i].selector);
-                $(card).find("span[datafld='location']").text(tasks[i].location.length > urlLength? tasks[i].location.substr(0, urlLength)+"..." : tasks[i].location);
-                $(card).find("span[datafld='location']").attr("title", tasks[i].location);
+                //$(card).find("span[datafld='url']").text(tasks[i].url.length > urlLength? tasks[i].url.substr(0, urlLength)+"..." : tasks[i].url);
+                //$(card).find("span[datafld='url']").attr("title", tasks[i].url);
+                //$(card).find("span[datafld='selector']").text(tasks[i].selector);
+                //$(card).find("span[datafld='location']").text(tasks[i].location.length > urlLength? tasks[i].location.substr(0, urlLength)+"..." : tasks[i].location);
+                //$(card).find("span[datafld='location']").attr("title", tasks[i].location);
                 $(card).find("span[datafld='killTime']").text(tasks[i].killTime.replace("T", " "));
                 $(card).find("span[datafld='leftTime']").text(getLeftTime(new Date(tasks[i].killTime).getTime() - standerTime));
                 $(card).find("span[datafld='leftTime']").attr("killTime", new Date(tasks[i].killTime).getTime());

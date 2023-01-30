@@ -7,24 +7,24 @@
         "        新增秒杀\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
-        "        <span class=\"secKill-name\">秒杀商品:</span><br/>\n" +
-        "        <input type=\"text\" name=\"taskName\" class=\"secKill-input-text\" value=\"\" id=\"taskName\" placeholder=\"请输入商品名称\" />\n" +
+        "        <span class=\"secKill-name\">秒杀关键字:</span><br/>\n" +
+        "        <input type=\"text\" name=\"taskName\" class=\"secKill-input-text\" value=\"\" id=\"taskName\" placeholder=\"请输入关键字\" />\n" +
         "    </div>\n" +
-        "    <div class=\"secKill-filed\">\n" +
+        "    <div class=\"secKill-filed, secKill-hidden\">\n" +
         "        <span class=\"secKill-name\">选择器:</span><br/>\n" +
         "        <input type=\"radio\" name=\"selector\" id=\"rb1\" value=\"jQuery\" checked=\"checked\"/>\n" +
         "        <label for=\"rb1\">jQuery</label>\n" +
         "        <input type=\"radio\" name=\"selector\" id=\"rb2\" value=\"xPath\"/>\n" +
         "        <label for=\"rb2\">xPath</label>\n" +
         "    </div>\n" +
-        "    <div class=\"secKill-filed\">\n" +
+        "    <div class=\"secKill-filed, secKill-hidden\">\n" +
         "        <span class=\"secKill-name\">选取结果:</span><br/>\n" +
         "        <input type=\"text\" name=\"location\" class=\"secKill-input-text\" id=\"location\" value=\"\" placeholder=\"#secKill-btn\"/>\n" +
         "    </div>\n" +
-        "    <div class=\"secKill-button\" style=\"width: 50px;\" id=\"search\">\n" +
+        "    <div class=\"secKill-button, secKill-hidden\" style=\"width: 50px;\" id=\"search\">\n" +
         "        定位(<span class=\"secKill-result\" id=\"result\">0</span>)\n" +
         "    </div>\n" +
-        "    <div class=\"secKill-button\" id=\"reset\">\n" +
+        "    <div class=\"secKill-button , secKill-hidden\" id=\"reset\">\n" +
         "        重选\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
@@ -33,16 +33,17 @@
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">秒杀频率(ms):</span><br/>\n" +
-        "        <input type=\"number\" name=\"frequency\"  class=\"secKill-input-number\"  id=\"frequency\"value=\"500\" min=\"100\" placeholder=\"单位：毫秒（ms）\"/>\n" +
+        "        <input type=\"number\" name=\"frequency\"  class=\"secKill-input-number\"  id=\"frequency\"value=\"2000\" min=\"100\" placeholder=\"单位：毫秒（ms）\"/>\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">秒杀次数:</span><br/>\n" +
-        "        <input type=\"number\" name=\"count\" class=\"secKill-input-number\" id=\"count\" value=\"10\" placeholder=\"尝试次数\"/>\n" +
+        "        <input type=\"number\" name=\"count\" class=\"secKill-input-number\" id=\"count\" value=\"1000\" placeholder=\"尝试次数\"/>\n" +
         "    </div>\n" +
         "    <div class=\"secKill-button\" id=\"add\"> 新增 </div>\n" +
         "    <div class=\"secKill-button\" id=\"close\"> 关闭 </div>\n" +
         "</div>";
     newElement.innerHTML = html;
+    console.log('10000')
     if($("#secKillForm").length === 0) {
         document.getElementsByTagName("body")[0].appendChild(newElement);
     }
@@ -53,42 +54,42 @@
     //光标定位元素获取location
     var targetSelected = false;
 
-    //根据光标定位元素
-    window.onmouseover = function(e) {
-        //光标锁定
-        if(!targetSelected) {
-            $(".secKillTarget").removeClass("secKillTarget");
-            $(e.target).addClass("secKillTarget");
-        }
-        //重选
-        $(e.target).click(function () {
-            if ($(this).attr("id") == "reset") {
-                $(".secKillTarget").removeClass("secKillTarget");
-                $("#secKillForm #location").val("");
-                $("#secKillForm #result").text(0);
-                targetSelected = false;
-                return false;
-            }
-        });
-        //右键选中目标
-        $(e.target).contextmenu(function(rightClickEvent){
-            if (!targetSelected) {
-                targetSelected = true;
-                var selector = $("#secKillForm input[name=selector]:checked").val();
-                if (selector == "jQuery") {
-                    var path = getDomPath(e.target);
-                    $("#secKillForm #location").val(path.join(' > '));
-                } else {
-                    var path = getXPathTo(e.target);
-                    $("#secKillForm #location").val(path);
-                }
-                $("#secKillForm #result").text(1);
-                alert("目标已选中！");
-                //return false;
-            }
-            //return false;
-        });
-    };
+    // //根据光标定位元素
+    // window.onmouseover = function(e) {
+    //     //光标锁定
+    //     if(!targetSelected) {
+    //         $(".secKillTarget").removeClass("secKillTarget");
+    //         $(e.target).addClass("secKillTarget");
+    //     }
+    //     //重选
+    //     $(e.target).click(function () {
+    //         if ($(this).attr("id") == "reset") {
+    //             $(".secKillTarget").removeClass("secKillTarget");
+    //             $("#secKillForm #location").val("");
+    //             $("#secKillForm #result").text(0);
+    //             targetSelected = false;
+    //             return false;
+    //         }
+    //     });
+    //     //右键选中目标
+    //     $(e.target).contextmenu(function(rightClickEvent){
+    //         if (!targetSelected) {
+    //             targetSelected = true;
+    //             var selector = $("#secKillForm input[name=selector]:checked").val();
+    //             if (selector == "jQuery") {
+    //                 var path = getDomPath(e.target);
+    //                 $("#secKillForm #location").val(path.join(' > '));
+    //             } else {
+    //                 var path = getXPathTo(e.target);
+    //                 $("#secKillForm #location").val(path);
+    //             }
+    //             $("#secKillForm #result").text(1);
+    //             alert("目标已选中！");
+    //             //return false;
+    //         }
+    //         //return false;
+    //     });
+    // };
 
     //定位元素
     $("#secKillForm #search").click(function () {
@@ -118,20 +119,25 @@
     //新增任务
     $("#secKillForm #add").click(function () {
         var killTask = {};
-        var location =  $("#secKillForm #location").val();
-        if(location == undefined || $.trim(location) == "") {
-            alert("请设定秒杀按钮选择结果");
-            return false;
-        }
-        killTask.url = window.location.href;
+        // var location =  $("#secKillForm #location").val();
+        // if(location == undefined || $.trim(location) == "") {
+        //     alert("请设定秒杀按钮选择结果");
+        //     return false;
+        // }
+        // killTask.url = window.location.href;
         killTask.id = new Date().getTime();
         killTask.name = $("#secKillForm #taskName").val();
-        killTask.selector = $("#secKillForm input[name=selector]:checked").val();
-        killTask.location = location;
+
+        killTask.url = "https://www.hermes.com/de/de/search/?s="+encodeURI(killTask.name)+"#|" 
+        
+        // Tasche Cabas H en Biais 40
+        // "https://www.hermes.com/de/de/search/?s=Tasche%20Cabas%20H%20en%20Biais%2040#|"
+        // killTask.selector = $("#secKillForm input[name=selector]:checked").val();
+        // killTask.location = location;
         killTask.killTime = $("#secKillForm #killTime").val();
         killTask.frequency = $("#secKillForm #frequency").val();
-        if($("#secKillForm #frequency").val() < 100) {
-            alert("秒杀频率最小值：100");
+        if($("#secKillForm #frequency").val() < 1000) {
+            alert("秒杀频率最小值：1000");
             return false;
         }
         killTask.count = $("#secKillForm #count").val();
@@ -140,6 +146,7 @@
             return false;
         }
         killTask.status = 0;
+        console.log('killTask-----',killTask)
         chrome.storage.local.get({"tasks": new Array()}, function(value){
             var tasks = value.tasks;
             tasks.push(killTask);

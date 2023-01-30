@@ -19,7 +19,9 @@
     z-index: 2147483649;
     box-sizing:unset;
 }
-
+#secKillForm .secKill-hidden {
+    display: none;
+}
 #secKillForm .secKill-input-text {
     display:block;
     width: 180px;
@@ -57,13 +59,15 @@
 }
 
 #secKillForm .secKill-logo {
-    font-size: 14px;
-    color: #ff803b;
+    display: none;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #000;
     word-break: break-all;
-    width: 30px;
-    padding: 3px 10px;
+    width: 130px;
+    padding: 6px 10px;
     font-weight: bolder;
-    background-color: #27ff09;
+    background-color: #999;
     box-shadow: 1px 1px 1px -1px #888888 inset;
     border-radius: 4px;
     float: left;
@@ -83,7 +87,7 @@
 #secKillForm .secKill-button {
     margin: 10px 5px;
     font-size: 14px;
-    color: #27ff09;
+    color: #fff;
     text-align: center;
     word-break: break-all;
     width: 45px;
@@ -91,7 +95,7 @@
     height: 50%;
     cursor: pointer;
     font-weight: bolder;
-    background-color: #6A6AFF;
+    background-color: #333;
     box-shadow: 1px 1px 1px #888888;
     border-radius: 4px;
     float: left;

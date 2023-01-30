@@ -92,7 +92,7 @@ function processTask(standerTime) {
                 }
             }
         });
-    }, 500);
+    }, 2000);
     if(oldTimer != null) {
         clearInterval(oldTimer);
     }
