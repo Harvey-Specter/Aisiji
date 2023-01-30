@@ -7,7 +7,7 @@
         "        新增秒杀\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
-        "        <span class=\"secKill-name\">秒杀关键字:</span><br/>\n" +
+        "        <span class=\"secKill-name\">关键字:</span><br/>\n" +
         "        <input type=\"text\" name=\"taskName\" class=\"secKill-input-text\" value=\"\" id=\"taskName\" placeholder=\"请输入关键字\" />\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed, secKill-hidden\">\n" +
@@ -28,15 +28,15 @@
         "        重选\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
-        "        <span class=\"secKill-name\">秒杀时间:</span><br/>\n" +
+        "        <span class=\"secKill-name\">开始时间:</span><br/>\n" +
         "        <input type=\"datetime-local\"  class=\"secKill-input-text\" value=\""+formatDateTime(new Date().getTime())+"T12:00:00\" step=\"1\" id=\"killTime\" name=\"killTime\">\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
-        "        <span class=\"secKill-name\">秒杀频率(ms):</span><br/>\n" +
+        "        <span class=\"secKill-name\">刷新频率(ms):</span><br/>\n" +
         "        <input type=\"number\" name=\"frequency\"  class=\"secKill-input-number\"  id=\"frequency\"value=\"2000\" min=\"100\" placeholder=\"单位：毫秒（ms）\"/>\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
-        "        <span class=\"secKill-name\">秒杀次数:</span><br/>\n" +
+        "        <span class=\"secKill-name\">尝试次数:</span><br/>\n" +
         "        <input type=\"number\" name=\"count\" class=\"secKill-input-number\" id=\"count\" value=\"1000\" placeholder=\"尝试次数\"/>\n" +
         "    </div>\n" +
         "    <div class=\"secKill-button\" id=\"add\"> 新增 </div>\n" +
@@ -49,7 +49,7 @@
     }
 
     //设置秒杀名称
-    $("#taskName").val("秒杀"+document.title);
+    $("#taskName").val("搜索"+document.title);
 
     //光标定位元素获取location
     var targetSelected = false;

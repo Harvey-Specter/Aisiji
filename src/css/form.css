@@ -85,13 +85,13 @@
 }
 
 #secKillForm .secKill-button {
-    margin: 10px 5px;
+    margin: 20px 5px;
     font-size: 14px;
     color: #fff;
     text-align: center;
     word-break: break-all;
     width: 45px;
-    padding: 3px 8px;
+    padding: 1px 8px;
     height: 50%;
     cursor: pointer;
     font-weight: bolder;
