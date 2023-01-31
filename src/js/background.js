@@ -116,6 +116,15 @@ function processTask(standerTime) {
                             
                                     const result = await message;
                                     console.log('executeScript-result==',result); // Logs true
+
+                                    if(result==true){
+                                        clearInterval(thisTimer);
+                                        console.log('查到了')   
+                                        var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png"};
+                                        chrome.notifications.create(dialogId+++"", opt);
+                                    }else{
+                                        console.log('BG没找到')   
+                                    }
                                 });
 
                                 // chrome.tabs.executeScript(tabId, { code: "secKill("+task.id+");"}, function(result){

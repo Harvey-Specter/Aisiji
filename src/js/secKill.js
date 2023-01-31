@@ -39,13 +39,16 @@ async function secKill(taskId) {
             if(taskId == tasks[i].id) {
                 result = dealTask(tasks[i]);
                 console.log('dealTask--return====',result);
-                return result 
+                // return result 
             }
         }
     }
+    console.log(nowTime+"-即将返回----",result);
+    chrome.runtime.sendMessage(result, function (response) {
+        console.log('sendMessage----',response); // Logs 'true'
+    });
 
-    console.log(nowTime+"-即将返回----false");
-    return result 
+   return result 
 }
 
 /**
