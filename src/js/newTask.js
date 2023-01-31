@@ -33,7 +33,7 @@
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">刷新频率(ms):</span><br/>\n" +
-        "        <input type=\"number\" name=\"frequency\"  class=\"secKill-input-number\"  id=\"frequency\"value=\"2000\" min=\"100\" placeholder=\"单位：毫秒（ms）\"/>\n" +
+        "        <input type=\"number\" name=\"frequency\"  class=\"secKill-input-number\"  id=\"frequency\"value=\"5000\" min=\"100\" placeholder=\"单位：毫秒（ms）\"/>\n" +
         "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">尝试次数:</span><br/>\n" +
@@ -150,6 +150,9 @@
             return false;
         }
         killTask.status = 0;
+
+        killTask.result = '';
+
         console.log('killTask-----',killTask)
         chrome.storage.local.get({"tasks": new Array()}, function(value){
             var tasks = value.tasks;

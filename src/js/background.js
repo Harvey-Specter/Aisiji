@@ -24,7 +24,7 @@ chrome.extension.onConnect.addListener(function(port) {
  * 每隔500ms去检查任务,异步处理任务
  */
 function processTask(standerTime) {
-    console.log("后端开启轮休任务！");
+    console.log("后端开启轮寻任务---------！");
     var timer = setInterval(function () {
         standerTime += 500;
         chrome.storage.local.get({"tasks": new Array()}, function(value) {
@@ -69,8 +69,8 @@ function processTask(standerTime) {
                             });
                         }
                         // if((new Date(tasks[i].killTime) - standerTime) >= 0 && (new Date(tasks[i].killTime) - standerTime) <= 600){
-                        console.log((new Date(tasks[i].killTime) - standerTime))
-                        if((new Date(tasks[i].killTime) - standerTime) >= -864000){
+                        console.log((new Date(tasks[i].killTime) - standerTime)) //43,860,983 
+                        if((new Date(tasks[i].killTime) - standerTime) >= -86400000){
                             //异步执行点击事件
                             var task = tasks[i];
                             var tabId = null;
@@ -85,9 +85,20 @@ function processTask(standerTime) {
                                         tabId = results[0].id;
                                     }
                                 }
-                                chrome.tabs.executeScript(tabId, { code: "secKill("+task.id+");"});
-                                var opt = { type: "basic", title: "秒杀助手提醒", message: task.name + "\n秒杀任务完成！", iconUrl: "image/bell.png"};
-                                chrome.notifications.create(dialogId+++"", opt);
+                                var thisTimer = timer
+                                chrome.tabs.executeScript(tabId, { code: "secKill("+task.id+");"},function(result){
+                                    console.log('executeScript-result==',result)
+                                    if(result&&result[0]==true){
+                                        clearInterval(thisTimer);
+                                        console.log('查到了')   
+                                        var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png"};
+                                        chrome.notifications.create(dialogId+++"", opt);
+                                    }else{
+                                        console.log('BG没找到')   
+                                    }
+                                });
+                                // var opt = { type: "basic", title: "提醒", message: task.name + "\n任务完成！", iconUrl: "image/bell.png"};
+                                // chrome.notifications.create(dialogId+++"", opt);
                             });
                         }
                     }

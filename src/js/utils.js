@@ -161,6 +161,7 @@ $(document).ready(function () {
                 $(contentDiv).find("span[datafld='leftTime']").attr("killTime", new Date(currentTask.killTime).getTime());
                 $(contentDiv).find("span[datafld='frequency']").text(currentTask.frequency);
                 $(contentDiv).find("span[datafld='count']").text(currentTask.count);
+                // $(contentDiv).find("span[datafld='result']").text(currentTask.result);
                 $(contentDiv).find(".update").css("display", "inline");
                 $(contentDiv).find(".updateInput").css("display", "none");
                 var opt = { type: "basic", title: "秒杀助手提醒", message:  currentTask.name + "\n任务修改成功！", iconUrl: "image/success.png" };
@@ -177,6 +178,7 @@ $(document).ready(function () {
                     $(contentDiv).find("input[name='killTime']").val(formatDate(new Date().getTime())+"T12:00:01");
                     $(contentDiv).find("input[name='frequency']").val(currentTask.frequency);
                     $(contentDiv).find("input[name='count']").val(currentTask.count);
+                    //$(contentDiv).find("input[name='result']").val(currentTask.result);
                     $(this).text("保存");
                     $(this).css("color","blue");
                 }
