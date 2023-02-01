@@ -14,8 +14,8 @@ const readLocalTask = async () => {
 async function secKill(taskId) {
   var result = false
   var nowTime = new Date().toLocaleString()
-  console.log(nowTime + "-开始秒杀！----", result);
-  console.log(taskId);
+  console.log(nowTime + "---开始秒杀！----", result);
+  console.log('taskId=====' + taskId);
   // result = readLocalTask;
   // return result;
 
@@ -71,6 +71,8 @@ function getElementsByXPath(STR_XPATH) {
  * @param task
  */
 function dealTask(task) {
+
+  console.log('dealTask=================0')
   var baseUrl = 'https://www.hermes.com'
   var result = false
   var count = 1;
@@ -115,15 +117,16 @@ function dealTask(task) {
       //   idValArray = idValue.split('-')
       //   pid = idValArray[idValArray.length - 1]
       location.href = baseUrl + phref
+      console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+      $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+      //   setTimeout(
+      //     function() {
+      //       console.log('55555555555555555555')
 
-      setTimeout(
-        function() {
-          console.log('55555555555555555555')
-
-          $(".button-base.button-primary.size-large").click()
-          $('simple-product-selector.ng-untouched.ng-pristine.ng-valid')
-        },
-        5000)
+      //       $(".button-base.button-primary.size-large").click()
+      //       $('simple-product-selector.ng-untouched.ng-pristine.ng-valid')
+      //     },
+      //     5000)
 
       result = true
     }
