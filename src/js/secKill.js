@@ -79,7 +79,7 @@ function dealTask(task) {
     // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
     $(".button-base.button-primary.size-large").click()
   } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
-    console.log('in cart')
+    console.log('in cart ')
   } else {
     var mainTitle = $(".main-title")
     if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
