@@ -118,7 +118,7 @@ function processTask(standerTime) {
                   console.log('executeScript-result==', result); // Logs true
 
                   if (result == true) {
-                    clearInterval(thisTimer);
+                    // clearInterval(thisTimer);
                     console.log('查到了')
                     var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
