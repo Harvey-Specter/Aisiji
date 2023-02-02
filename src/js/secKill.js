@@ -97,6 +97,11 @@ function dealTask(task) {
     sleep(300)
     $('.button-base.button-primary.size-large').click()
 
+  } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
+    // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
+    var payUrl = location.href
+    console.log('payUrl====', payUrl)
+    return payUrl
   } else {
     var mainTitle = $(".main-title")
     if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
