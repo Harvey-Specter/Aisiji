@@ -64,7 +64,7 @@ function getElementsByXPath(STR_XPATH) {
  */
 function dealTask(task) {
 
-  console.log('dealTask=================0')
+  console.log('dealTask=================0') //https://www.hermes.com/de/de/checkout/
   var baseUrl = 'https://www.hermes.com'
   var result = false
   var count = 1;
@@ -78,8 +78,25 @@ function dealTask(task) {
     // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
     // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
     $(".button-base.button-primary.size-large").click()
+    sleep(4000)
+    location.href = 'https://www.hermes.com/de/de/cart/'
   } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
-    console.log('in cart ')
+    console.log('in cart sleep 3s')
+    sleep(3000)
+    $('.button-base.button-primary.size-large').click()
+
+  } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
+
+    console.log('in checkout sleep 2s')
+    sleep(2000)
+    $('.button-base.button-primary.size-large').click()
+    sleep(500)
+    $('#radio-button-payment_method-1-input').click()
+    sleep(400)
+    $('#checkbox-gtc').click()
+    sleep(300)
+    $('.button-base.button-primary.size-large').click()
+
   } else {
     var mainTitle = $(".main-title")
     if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
