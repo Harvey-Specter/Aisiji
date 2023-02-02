@@ -73,14 +73,17 @@ function dealTask(task) {
   console.log(nowTime + "==" + location.href.indexOf('www.hermes.com/de/de/product'))
 
   if (location.href.indexOf('www.hermes.com/de/de/product') < 0 && location.href != task.url) {
+
     location.href = task.url
   } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
+    sleep(2000)
     // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
     // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
     $(".button-base.button-primary.size-large").click()
-    sleep(4000)
+    sleep(2000)
     location.href = 'https://www.hermes.com/de/de/cart/'
   } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
+
     console.log('in cart sleep 3s')
     sleep(3000)
     $('.button-base.button-primary.size-large').click()
