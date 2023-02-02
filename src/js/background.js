@@ -125,6 +125,7 @@ function processTask(standerTime) {
                   } else if (result && result.indexOf('pay') > -1) {
                     var opt = { type: "basic", title: "支付地址！", message: task.name + "\n" + result, iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
+                    clearInterval(thisTimer);
                   } else {
                     console.log('BG没找到')
                   }
