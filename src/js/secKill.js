@@ -7,6 +7,12 @@ const readLocalTask = async () => {
   });
 };
 
+function sleep(delay) {
+  var start = (new Date()).getTime();
+  while ((new Date()).getTime() - start < delay) {
+    continue;
+  }
+}
 /**
  * 根据任务ID获取任务，执行点击
  * @param taskId
@@ -16,20 +22,6 @@ async function secKill(taskId) {
   var nowTime = new Date().toLocaleString()
   console.log(nowTime + "---开始秒杀！----", result);
   console.log('taskId=====' + taskId);
-  // result = readLocalTask;
-  // return result;
-
-  // chrome.storage.local.get({"tasks": new Array()}, function(value) {
-  //     tasks = value.tasks;
-  //     if(tasks != undefined && tasks != null && tasks.length > 0) {
-  //         for(var i=0; i<tasks.length; i++) {
-  //             if(taskId == tasks[i].id) {
-  //                 result = dealTask(tasks[i]);
-  //                 return result 
-  //             }
-  //         }
-  //     }
-  // });
 
   var tasks = await readLocalTask();
 
@@ -78,30 +70,18 @@ function dealTask(task) {
   var count = 1;
   // var timer = setInterval(function () {
   var nowTime = new Date().toLocaleString()
-  console.log(nowTime + "==" + count)
-  // if(task.selector == "jQuery") {
-  //     $(task.location).each(function(){
-  //         this.click();
-  //     });
-  // } else {
-  //     $(getElementsByXPath(task.location)).each(function(){
-  //         this.click();
-  //     });
-  // }
-  // console.log(nowTime+' dealTask')
-  if (location.href != task.url) {
+  console.log(nowTime + "==" + location.href.indexOf('www.hermes.com/de/de/product'))
+
+  if (location.href.indexOf('www.hermes.com/de/de/product') < 0 && location.href != task.url) {
     location.href = task.url
+  } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
+    // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+    // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+    $(".button-base.button-primary.size-large").click()
+  } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
+    console.log('in cart')
   } else {
     var mainTitle = $(".main-title")
-    // var captcha = $(".captcha__human__title")
-    // if(captcha.html().indexOf('禁止')>=0){
-    //     console.log('禁止访问-休息五分钟')
-    //     console.log(mainTitle.html())
-    //     // setTimeout(function(){
-    //     //     //doSomething(这里写时间到之后需要去做的事情)
-    //     //     console.log(mainTitle.html())
-    //     // }, 300000);
-    // }else 
     if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
       console.log('没找到')
       task.result = nowTime + ' 没找到'
@@ -111,22 +91,13 @@ function dealTask(task) {
       console.log('ok')
       task.result = nowTime + ' OK'
       // clearInterval(timer)
-      //console.log($('.grid-container a:first').html())
+
       console.log($('.grid-container .product-item a:first').attr('href'))
       var phref = $('.grid-container .product-item a:first').attr('href')
-      //   idValArray = idValue.split('-')
-      //   pid = idValArray[idValArray.length - 1]
-      location.href = baseUrl + phref
-      console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-      $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-      //   setTimeout(
-      //     function() {
-      //       console.log('55555555555555555555')
 
-      //       $(".button-base.button-primary.size-large").click()
-      //       $('simple-product-selector.ng-untouched.ng-pristine.ng-valid')
-      //     },
-      //     5000)
+      location.href = baseUrl + phref
+      //   console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+      //   $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
 
       result = true
     }
