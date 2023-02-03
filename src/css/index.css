@@ -55,8 +55,8 @@ body {
   font-size: 16px;
   background-color: #333;
   color: #FE9A00;
-  height: 40px;
-  line-height: 40px;
+  height: 30px;
+  line-height: 30px;
   padding: 0px 6px;
   font-weight: bolder;
   border-top-left-radius: 5px;
@@ -97,8 +97,8 @@ body {
 
 .footer {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 30px;
+  line-height: 30px;
   font-weight: bolder;
   background-color: #333;
 }
