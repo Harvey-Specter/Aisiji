@@ -64,7 +64,7 @@ function getElementsByXPath(STR_XPATH) {
  */
 function dealTask(task) {
 
-  console.log('dealTask=================0') //https://www.hermes.com/de/de/checkout/
+  console.log('dealTask=================0')
   var baseUrl = 'https://www.hermes.com'
   var result = false
   var count = 1;

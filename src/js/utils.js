@@ -68,8 +68,8 @@ $(document).ready(function () {
                 //$(card).find("span[datafld='location']").text(tasks[i].location.length > urlLength? tasks[i].location.substr(0, urlLength)+"..." : tasks[i].location);
                 //$(card).find("span[datafld='location']").attr("title", tasks[i].location);
                 $(card).find("span[datafld='killTime']").text(tasks[i].killTime.replace("T", " "));
-                $(card).find("span[datafld='leftTime']").text(getLeftTime(new Date(tasks[i].killTime).getTime() - standerTime));
-                $(card).find("span[datafld='leftTime']").attr("killTime", new Date(tasks[i].killTime).getTime());
+                //$(card).find("span[datafld='leftTime']").text(getLeftTime(new Date(tasks[i].killTime).getTime() - standerTime));
+                //$(card).find("span[datafld='leftTime']").attr("killTime", new Date(tasks[i].killTime).getTime());
                 $(card).find("span[datafld='frequency']").text(tasks[i].frequency);
                 $(card).find("span[datafld='count']").text(tasks[i].count);
                 $(card).find(".footer ul").attr("id", tasks[i].id);
@@ -157,8 +157,8 @@ $(document).ready(function () {
                 }
                 $(contentDiv).next().find("li[datatype='status']").text(statusText);
                 $(contentDiv).find("span[datafld='killTime']").text(currentTask.killTime.replace("T", " "));
-                $(contentDiv).find("span[datafld='leftTime']").text(getLeftTime(new Date(currentTask.killTime).getTime() - standerTime));
-                $(contentDiv).find("span[datafld='leftTime']").attr("killTime", new Date(currentTask.killTime).getTime());
+                //$(contentDiv).find("span[datafld='leftTime']").text(getLeftTime(new Date(currentTask.killTime).getTime() - standerTime));
+                //$(contentDiv).find("span[datafld='leftTime']").attr("killTime", new Date(currentTask.killTime).getTime());
                 $(contentDiv).find("span[datafld='frequency']").text(currentTask.frequency);
                 $(contentDiv).find("span[datafld='count']").text(currentTask.count);
                 // $(contentDiv).find("span[datafld='result']").text(currentTask.result);
@@ -264,9 +264,9 @@ function updateTime(standerTime) {
     var timer = setInterval(function () {
         standerTime += 1000;
         $("#standTime").text(formatDateTime(standerTime));
-        $("span[datafld='leftTime']").each(function () {
-            $(this).text(getLeftTime(parseInt($(this).attr("killTime"))-standerTime+1000));
-        });
+        // $("span[datafld='leftTime']").each(function () {
+        //     $(this).text(getLeftTime(parseInt($(this).attr("killTime"))-standerTime+1000));
+        // });
     }, 1000);
     if(oldTimer != null) {
         clearInterval(oldTimer);
@@ -285,18 +285,18 @@ function updateTime(standerTime) {
 }
 
 
-function getLeftTime(leftTime) {
-    if(!isNaN(leftTime)) {
-        if(leftTime <= 0) {
-            return "00:00:00";
-        } else {
-            var date = new Date(null);
-            date.setMilliseconds(leftTime)
-            var result = date.toISOString().substr(11, 8);
-            return result;
-        }
-    }
-}
+// function getLeftTime(leftTime) {
+//     if(!isNaN(leftTime)) {
+//         if(leftTime <= 0) {
+//             return "00:00:00";
+//         } else {
+//             var date = new Date(null);
+//             date.setMilliseconds(leftTime)
+//             var result = date.toISOString().substr(11, 8);
+//             return result;
+//         }
+//     }
+// }
 
 /**
  * 日期格式化
