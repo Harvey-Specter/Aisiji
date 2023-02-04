@@ -114,7 +114,7 @@ $(document).ready(function () {
         if($(this).index() == 1 && currentTask.status == 1) {
             currentTask.status = 0;
             $(this).siblings(":first").text("运行中");
-            $(this).siblings(":first").css("color","green");
+            $(this).siblings(":first").css("color","yellow");
             var opt = { type: "basic", title: "秒杀助手提醒", message: currentTask.name + "\n秒杀任务已启动！", iconUrl: "image/runing.png"};
             chrome.notifications.create(dialogId+++"", opt);
         }
@@ -123,7 +123,7 @@ $(document).ready(function () {
         if($(this).index() == 2 && currentTask.status == 0) {
             currentTask.status = 1;
             $(this).siblings(":first").text("已暂停");
-            $(this).siblings(":first").css("color","yellow");
+            $(this).siblings(":first").css("color","beige");
             var opt = { type: "basic", title: "秒杀助手提醒", message:  currentTask.name + "\n秒杀任务已暂停！", iconUrl: "image/pause.png" };
             chrome.notifications.create(dialogId+++"", opt);
         }
