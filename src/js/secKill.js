@@ -99,6 +99,7 @@ function dealTask(task) {
   var taskNames = task.name
   taskNamesArray = taskNames.split('|')
   for(var i=0;i<taskNamesArray.length;i++){
+    sleep(4000)
     task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
     if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
       location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
@@ -143,9 +144,13 @@ function dealTask(task) {
     } else {
       var mainTitle = $(".main-title")
       if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
-        console.log('没找到')
+        console.log('没找到',taskNamesArray.length)
         task.result = nowTime + ' 没找到'
-        location.reload();
+        if(taskNamesArray.length==1){
+          location.reload();
+        }else{
+          continue
+        }
         result = false
       } else {
         console.log('ok')
