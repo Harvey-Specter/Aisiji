@@ -136,7 +136,7 @@ $(document).ready(function () {
                 currentTask.frequency = $(contentDiv).find("input[name='frequency']").val();
                 currentTask.count = $(contentDiv).find("input[name='count']").val();
                 if(new Date(currentTask.killTime).getTime() - standerTime <= 864000) {
-                    currentTask.status = 2; //已过期
+                    currentTask.status = 1; //已过期
                 } else {
                     currentTask.status = 1; //已暂停
                 }

@@ -58,11 +58,36 @@ function getElementsByXPath(STR_XPATH) {
   return xnodes;
 }
 
+function getTinyUrl(bigurl)
+{
+  var rsStr = $.ajax({
+      type: "POST",
+      url: 'https://api.tinyurl.com/create',
+      // headers: {
+      //   "Authorization": "Bearer " + btoa(USERNAME + ":" + PASSWORD)
+      // },
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', 'Bearer NG7vRR87vgS4prlbsVWf0nLEOCoU8FdCTek0FMWqjEBQpcNF3iFLHgTfHB4E');
+      },
+      data: { url:bigurl ,domain: "tiny.one"},
+      success: function (rs){
+        console.log('getTinyUrl===',rs)
+      },
+      dataType: 'json',
+      async: false,
+    }).responseText;
+
+    rsObj=JSON.parse(rsStr);
+    return rsObj.data.tiny_url
+}
+
 /**
  * 处理任务
  * @param task
  */
 function dealTask(task) {
+
+  // return getTinyUrl('https://stackoverflow.com/questions/6685249/jquery-performing-synchronous-ajax-requests')
 
   console.log('dealTask=================0')
   var baseUrl = 'https://www.hermes.com'
@@ -70,75 +95,80 @@ function dealTask(task) {
   var count = 1;
   // var timer = setInterval(function () {
   var nowTime = new Date().toLocaleString()
-  console.log(nowTime + "==" + location.href.indexOf('www.hermes.com/de/de/product'))
+  console.log(nowTime + "==" + task.name)
+  var taskNames = task.name
+  taskNamesArray = taskNames.split('|')
+  for(var i=0;i<taskNamesArray.length;i++){
+    task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
+    if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
+      location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
+      location.href.indexOf('www.hermes.com/de/de/checkout') < 0 &&
+      location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') < 0 &&
+      location.href.indexOf('live.adyen.com/hpp/checkout') < 0 &&
+      location.href != task.url) {
 
-  //https://live.adyen.com/hpp/checkout.shtml?u=redirectPayPal&p=eJyFVlt3qjoQ-jX64pIFwQs*5MFbt566bZf10u6Xrgij5gghTQJu**vPgGhbb8fFApz5MpnbN4FJGXKfGR6LoVjFVsiXiqn9mEVAWbAHURVxAFUmebVQldn1JXNQGkXUIZZt2eUlD0Mu1u0gUKC15XOzp53*ZDQcX6jiRBi1p73*uUbG2rCwiw5Q4jjN1rketQae1LOKUy58oB1QqL5EKQBDOyyJtL9JQhAoYaWuW2o9QKV2bnW6l7hdGWMSQb61ZHvJwnLhZi5CV-1EKRD*4X9-NikHEPIU1P5nxAePLnRfIZ*rLmI*B9wI*hL2P1GfLSjCjkD5GyZM2899pANQEej*7KQYCgNrlVffMtma7qDffXyaTd9-9cf9ybB7FZkWzdFondRPKgA1gRVkaQRatx3Xa3le-QS4rzOJEj1mGH19aC5e54vXx8n0cTFvfYXwwtfUXQSyE83fFnNNWs6uNpD1h8FbsvuY7df7iWakl36myZaR2brk9nCpYQEatUCkVKqgHEsQXKQx9yGXY6bBsS5qfx0WgPYVl1kC6JRhFaDSZUumK4MKiEqHM64rNfvGYm4gakd5Dequjb87uGFAB7ZHWqTWbbe7d4BzZgqb98wh6hlzCMKwNdxEiiRagnpaDXGFps4NVMpMF-t1HWO3j2MBF7CjmRHCMzPItgh3-hm6AgnMVGNRNTyCODHUqARQrGeTEd0YI3XJbZfIA16YZn*LEL2JpQRVzbrcykcZ0i66BKBEg0rRH42vz4fthwKxOBMmEHAFvkFN6uAtjH0WFpjfYDZxUHIfzjiDjXRkTYk0VN6p6CaKD46SeuZqPXMWb7vdztrk8IN7KArg*6NISDVlIQ9yNuXijZRlxfU2TyI21RZMXjzbYnnqsIJZZU4ZvArNh1zB8RsQ-1i9ru3egsRhrGg2WtotXyWYpiXwNWTPEJKKzDUkzAQrxaJlzPWP91tmC5blDLsOyZu-Rwlp1Jq202zcgEVMJCvmYyFA3Y9WqjhIfDPlJoR7nL2**iPBLsjGvnMDoPkn0PHT*8vwT-8WZJv8IPN1VCL966jjVD80J*0VfyvMVDZx9C3VXD8J6OJBvi3ama5Y*L0WesOlRAoUlmbPL5Vq5cVgwzAcjBqPDGzFedaUWcTEJm7VJnhNbQ*56Dp4qzX*lAuWWSuutMk-K0b8JFyDwEOA-m6P*idZyE64QSzWJ7mBEOQGR8g4nxjUazj1Rs0mLbdl14*ofsR4iP1Q9xy7RhxSqtkfHxmxjoDsUFLYCtlM7qM84y4claOM3UADeO*d-Pk6hRzcy-PchndUFUem3nJx*FBIllZKLNJwas2G03RI03WwRNaf3QIem9O3Dfv41fnHlra79N5fPz95u16b--2rB--6crVYkeW0XdYmVkA91-4P8sptTA
+      location.href = task.url
+    } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
+      sleep(2000)
+      // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+      // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+      console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
+      $(".button-base.button-primary.size-large").click()
+      sleep(2000)
+      location.href = 'https://www.hermes.com/de/de/cart/'
+    } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
 
-  if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
-    location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
-    location.href.indexOf('www.hermes.com/de/de/checkout') < 0 &&
-    location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') < 0 &&
-    location.href.indexOf('live.adyen.com/hpp/checkout') < 0 &&
-    location.href != task.url) {
+      console.log('in cart sleep 3s')
+      sleep(3000)
+      $('.button-base.button-primary.size-large').click()
 
-    location.href = task.url
-  } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
-    sleep(2000)
-    // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-    // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-    console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
-    $(".button-base.button-primary.size-large").click()
-    sleep(2000)
-    location.href = 'https://www.hermes.com/de/de/cart/'
-  } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
+    } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
 
-    console.log('in cart sleep 3s')
-    sleep(3000)
-    $('.button-base.button-primary.size-large').click()
+      console.log('in checkout sleep 2s')
+      sleep(2000)
+      $('.button-base.button-primary.size-large').click()
+      sleep(500)
+      $('#radio-button-payment_method-1-input').click()
+      sleep(400)
+      $('#checkbox-gtc').click()
+      sleep(300)
+      $('.button-base.button-primary.size-large').click()
 
-  } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
-
-    console.log('in checkout sleep 2s')
-    sleep(2000)
-    $('.button-base.button-primary.size-large').click()
-    sleep(500)
-    $('#radio-button-payment_method-1-input').click()
-    sleep(400)
-    $('#checkbox-gtc').click()
-    sleep(300)
-    $('.button-base.button-primary.size-large').click()
-
-  } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
-    // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
-    var payUrl = location.href
-    console.log('payUrl====', payUrl)
-    return payUrl
-  } else {
-    var mainTitle = $(".main-title")
-    if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
-      console.log('没找到')
-      task.result = nowTime + ' 没找到'
-      location.reload();
-      result = false
+    } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
+      // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
+      var payUrl = location.href
+      console.log('payUrl====', payUrl)
+      return getTinyUrl(payUrl)
+      //return payUrl
     } else {
-      console.log('ok')
-      task.result = nowTime + ' OK'
-      // clearInterval(timer)
-
-      console.log($('.grid-container .product-item a:first').attr('href'))
-      var phref = $('.grid-container .product-item a:first').attr('href')
-
-      location.href = baseUrl + phref
-      //   console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-      //   $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-
-      result = true
+      var mainTitle = $(".main-title")
+      if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
+        console.log('没找到')
+        task.result = nowTime + ' 没找到'
+        location.reload();
+        result = false
+      } else {
+        console.log('ok')
+        task.result = nowTime + ' OK'
+        // clearInterval(timer)
+        console.log($('.grid-container .product-item a:first').attr('href'))
+        var phref = $('.grid-container .product-item a:first').attr('href')
+        location.href = baseUrl + phref
+        //   console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+        //   $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+        result = true
+      }
+      // count++;
+      // if(count>task.count) {
+      //     clearInterval(timer);
+      // }
     }
-    // count++;
-    // if(count>task.count) {
-    //     clearInterval(timer);
-    // }
+    if(result==true){
+      return result
+    }
   }
+  // token:NG7vRR87vgS4prlbsVWf0nLEOCoU8FdCTek0FMWqjEBQpcNF3iFLHgTfHB4E
+  //https://live.adyen.com/hpp/checkout.shtml?u=redirectPayPal&p=eJyFVlt3qjoQ-jX64pIFwQs*5MFbt566bZf10u6Xrgij5gghTQJu**vPgGhbb8fFApz5MpnbN4FJGXKfGR6LoVjFVsiXiqn9mEVAWbAHURVxAFUmebVQldn1JXNQGkXUIZZt2eUlD0Mu1u0gUKC15XOzp53*ZDQcX6jiRBi1p73*uUbG2rCwiw5Q4jjN1rketQae1LOKUy58oB1QqL5EKQBDOyyJtL9JQhAoYaWuW2o9QKV2bnW6l7hdGWMSQb61ZHvJwnLhZi5CV-1EKRD*4X9-NikHEPIU1P5nxAePLnRfIZ*rLmI*B9wI*hL2P1GfLSjCjkD5GyZM2899pANQEej*7KQYCgNrlVffMtma7qDffXyaTd9-9cf9ybB7FZkWzdFondRPKgA1gRVkaQRatx3Xa3le-QS4rzOJEj1mGH19aC5e54vXx8n0cTFvfYXwwtfUXQSyE83fFnNNWs6uNpD1h8FbsvuY7df7iWakl36myZaR2brk9nCpYQEatUCkVKqgHEsQXKQx9yGXY6bBsS5qfx0WgPYVl1kC6JRhFaDSZUumK4MKiEqHM64rNfvGYm4gakd5Dequjb87uGFAB7ZHWqTWbbe7d4BzZgqb98wh6hlzCMKwNdxEiiRagnpaDXGFps4NVMpMF-t1HWO3j2MBF7CjmRHCMzPItgh3-hm6AgnMVGNRNTyCODHUqARQrGeTEd0YI3XJbZfIA16YZn*LEL2JpQRVzbrcykcZ0i66BKBEg0rRH42vz4fthwKxOBMmEHAFvkFN6uAtjH0WFpjfYDZxUHIfzjiDjXRkTYk0VN6p6CaKD46SeuZqPXMWb7vdztrk8IN7KArg*6NISDVlIQ9yNuXijZRlxfU2TyI21RZMXjzbYnnqsIJZZU4ZvArNh1zB8RsQ-1i9ru3egsRhrGg2WtotXyWYpiXwNWTPEJKKzDUkzAQrxaJlzPWP91tmC5blDLsOyZu-Rwlp1Jq202zcgEVMJCvmYyFA3Y9WqjhIfDPlJoR7nL2**iPBLsjGvnMDoPkn0PHT*8vwT-8WZJv8IPN1VCL966jjVD80J*0VfyvMVDZx9C3VXD8J6OJBvi3ama5Y*L0WesOlRAoUlmbPL5Vq5cVgwzAcjBqPDGzFedaUWcTEJm7VJnhNbQ*56Dp4qzX*lAuWWSuutMk-K0b8JFyDwEOA-m6P*idZyE64QSzWJ7mBEOQGR8g4nxjUazj1Rs0mLbdl14*ofsR4iP1Q9xy7RhxSqtkfHxmxjoDsUFLYCtlM7qM84y4claOM3UADeO*d-Pk6hRzcy-PchndUFUem3nJx*FBIllZKLNJwas2G03RI03WwRNaf3QIem9O3Dfv41fnHlra79N5fPz95u16b--2rB--6crVYkeW0XdYmVkA91-4P8sptTA
   return result
   // }, task.frequency);
 

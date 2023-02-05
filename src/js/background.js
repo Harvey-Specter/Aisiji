@@ -122,10 +122,10 @@ function processTask(standerTime) {
                     console.log('查到了')
                     var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
-                  } else if (result && result.indexOf('pay') > -1) {
+                  } else if (result && (result.indexOf('pay') > -1 || result.indexOf('tiny.one')>-1 ) ) {
                     var opt = { type: "basic", title: "支付地址！ ", message: task.name + "\n" + result, iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
-                    alert('executeScript-finish=支付地址！  ', result);
+                    alert('executeScript-finish=支付地址！  \n'+ result);
                     console.log('executeScript-finish=支付地址！  ', result);
                     clearInterval(thisTimer);
                   } else {

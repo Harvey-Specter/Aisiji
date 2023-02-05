@@ -55,7 +55,7 @@ body {
   font-size: 16px;
   background-color: #333;
   color: #FE9A00;
-  height: 30px;
+  height: auto;
   line-height: 30px;
   padding: 0px 6px;
   font-weight: bolder;
