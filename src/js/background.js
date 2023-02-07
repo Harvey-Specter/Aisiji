@@ -87,21 +87,6 @@ function processTask(standerTime) {
                 }
                 var thisTimer = timer
 
-                // async emptyPromise => {
-
-                //     // Create a promise that resolves when chrome.runtime.onMessage fires
-                //     const message = new Promise(resolve => {
-                //         const listener = request => {
-                //             chrome.runtime.onMessage.removeListener(listener);
-                //             resolve(request);
-                //         };
-                //         chrome.runtime.onMessage.addListener(listener);
-                //     });
-
-                //     const result = await message;
-                //     console.log(result); // Logs true
-                // }
-
                 chrome.tabs.executeScript(tabId, { code: "secKill(" + task.id + ");" }, async emptyPromise => {
 
                   // Create a promise that resolves when chrome.runtime.onMessage fires
@@ -122,30 +107,16 @@ function processTask(standerTime) {
                     console.log('查到了')
                     var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
-                  } else if (result && (result.indexOf('pay') > -1 || result.indexOf('tiny.one')>-1 ) ) {
+                  } else if (result && (result.indexOf('pay') > -1 || result.indexOf('tiny.one') > -1)) {
                     var opt = { type: "basic", title: "支付地址！ ", message: task.name + "\n" + result, iconUrl: "image/bell.png" };
                     chrome.notifications.create(dialogId++ + "", opt);
-                    alert('executeScript-finish=支付地址！  \n'+ result);
+                    alert('executeScript-finish=支付地址！  \n' + result);
                     console.log('executeScript-finish=支付地址！  ', result);
                     clearInterval(thisTimer);
                   } else {
                     console.log('BG没找到')
                   }
                 });
-
-                // chrome.tabs.executeScript(tabId, { code: "secKill("+task.id+");"}, function(result){
-                //     console.log('executeScript-result==',result)
-                //     if(result&&result[0]==true){
-                //         clearInterval(thisTimer);
-                //         console.log('查到了')   
-                //         var opt = { type: "basic", title: "提醒", message: task.name + "\nOK！", iconUrl: "image/bell.png"};
-                //         chrome.notifications.create(dialogId+++"", opt);
-                //     }else{
-                //         console.log('BG没找到')   
-                //     }
-                // });
-                // var opt = { type: "basic", title: "提醒", message: task.name + "\n任务完成！", iconUrl: "image/bell.png"};
-                // chrome.notifications.create(dialogId+++"", opt);
               });
             }
           }
