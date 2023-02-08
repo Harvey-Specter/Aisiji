@@ -98,79 +98,79 @@ function dealTask(task) {
   var taskNames = task.name
   // taskNamesArray = taskNames.split('|')
   // for(var i=0;i<taskNamesArray.length;i++){
-    // sleep(4000)
-    // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
+  // sleep(4000)
+  // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
 
-    if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
-      location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
-      location.href.indexOf('www.hermes.com/de/de/checkout') < 0 &&
-      location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') < 0 &&
-      location.href.indexOf('live.adyen.com/hpp/checkout') < 0 &&
-      location.href != task.url) {
+  if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
+    location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
+    location.href.indexOf('www.hermes.com/de/de/checkout') < 0 &&
+    location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') < 0 &&
+    location.href.indexOf('live.adyen.com/hpp/checkout') < 0 &&
+    location.href != task.url) {
 
-      location.href = task.url
-    } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
-      sleep(2000)
-      // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-      // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-      console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
-      $(".button-base.button-primary.size-large").click()
-      sleep(2000)
-      location.href = 'https://www.hermes.com/de/de/cart/'
-    } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
+    location.href = task.url
+  } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
+    sleep(1000)
+    // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+    // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+    console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
+    $(".button-base.button-primary.size-large").click()
+    sleep(2000)
+    location.href = 'https://www.hermes.com/de/de/cart/'
+  } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
 
-      console.log('in cart sleep 3s')
-      sleep(3000)
-      $('.button-base.button-primary.size-large').click()
+    console.log('in cart sleep 3s')
+    sleep(2000)
+    $('.button-base.button-primary.size-large').click()
 
-    } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
+  } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
 
-      console.log('in checkout sleep 2s')
-      sleep(2000)
-      $('.button-base.button-primary.size-large').click()
-      sleep(500)
-      $('#radio-button-payment_method-1-input').click()
-      sleep(400)
-      $('#checkbox-gtc').click()
-      sleep(300)
-      $('.button-base.button-primary.size-large').click()
+    console.log('in checkout sleep 2s')
+    sleep(1000)
+    $('.button-base.button-primary.size-large').click()
+    sleep(500)
+    $('#radio-button-payment_method-1-input').click()
+    sleep(400)
+    $('#checkbox-gtc').click()
+    sleep(300)
+    $('.button-base.button-primary.size-large').click()
 
-    } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
-      // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
-      var payUrl = location.href
-      console.log('payUrl====', payUrl)
-      return getTinyUrl(payUrl)
-      //return payUrl
-    } else {
-      var mainTitle = $(".main-title")
-      if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
-        console.log('没找到--')
-        task.result = nowTime + ' 没找到'
-        // if(taskNamesArray.length==1){
-        location.reload();
-        // }else{
-        //   continue
-        // }
-        result = false
-      } else {
-        console.log('ok')
-        task.result = nowTime + ' OK'
-        // clearInterval(timer)
-        console.log($('.grid-container .product-item a:first').attr('href'))
-        var phref = $('.grid-container .product-item a:first').attr('href')
-        location.href = baseUrl + phref
-        //   console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-        //   $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-        result = true
-      }
-      // count++;
-      // if(count>task.count) {
-      //     clearInterval(timer);
+  } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
+    // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
+    var payUrl = location.href
+    console.log('payUrl====', payUrl)
+    return getTinyUrl(payUrl)
+    //return payUrl
+  } else {
+    var mainTitle = $(".main-title")
+    if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
+      console.log('没找到--')
+      task.result = nowTime + ' 没找到'
+      // if(taskNamesArray.length==1){
+      location.reload();
+      // }else{
+      //   continue
       // }
+      result = false
+    } else {
+      console.log('ok')
+      task.result = nowTime + ' OK'
+      // clearInterval(timer)
+      console.log($('.grid-container .product-item a:first').attr('href'))
+      var phref = $('.grid-container .product-item a:first').attr('href')
+      location.href = baseUrl + phref
+      //   console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+      //   $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+      result = true
     }
-    if (result == true) {
-      return result
-    }
+    // count++;
+    // if(count>task.count) {
+    //     clearInterval(timer);
+    // }
+  }
+  if (result == true) {
+    return result
+  }
   // }
   // token:NG7vRR87vgS4prlbsVWf0nLEOCoU8FdCTek0FMWqjEBQpcNF3iFLHgTfHB4E
   return result
