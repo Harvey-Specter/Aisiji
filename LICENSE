@@ -39,6 +39,8 @@ https://www.hermes.com/de/de/search/?s=Tasche%20Cabas%20H%20en%20Biais%2040#|
 https://www.hermes.com/de/de/product/tasche-cabas-h-en-biais-40-H082924CAAC/
 https://www.hermes.com/de/de/product/tasche-cabas-h-en-biais-40-H082924CAAX/
 
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/
+
 https://www.hermes.com/de/de/cart/
 https://www.hermes.com/de/de/checkout/ 继续-〉支付
 
@@ -56,3 +58,18 @@ Es liegt kein Ergebnis für “Tasche Hermès Geta” vor, aber werfen Sie doch 
 
 async
 https://stackoverflow.com/questions/59440008/how-to-wait-for-asynchronous-chrome-storage-local-get-to-finish-before-continu
+
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37/
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC37/
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC18/
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK18/
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK89/
+https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/
+
+curl --cookie "OptanonAlertBoxClosed=2023-01-28T00:44:44.958Z; OptanonConsent=isGpcEnabled=0&datestamp=Thu+Feb+09+2023+22%3A30%3A50+GMT%2B0800+(%E4%B8%AD%E5%9B%BD%E6%A8%99%E6%BA%96%E6%99%82)&version=6.20.0&isIABGlobal=false&hosts=&consentId=fd1c7ee7-6385-47b3-beea-c6414c99a49a&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0004%3A0%2CC0003%3A0&geolocation=%3B&AwaitingReconsent=false; locale-country-data={"country":"de","locale":"de","language":"de"}; has_js=1; x-xsrf-token=cacc952a-9d20-4100-a4c1-fd7968be78fc; _fbp=fb.1.1675126851969.901561522; _ga=GA1.2.1300935900.1675126851; _ga_Y862HCHCQ7=GS1.1.1675775245.3.0.1675775251.0.0.0; ECOM_SESS=ehh6u3v51aghwh77vsrjpzm833; correlation_id=gg54phlnqyt2ll33gg4pw73qeqwo20og70346buh94xy8447eg1pwhkc1murn355; datadome=7XiaVTbSokPWPCpLRHigkftu-vdixNdc2FqTGvUjRMV69IVu50psnSEKTekNy9O-xA-RiZUHFoA6NfkeEgRbIl1mQfYEfNdbaviAtKFcGb0AgjrqZVWSCli77W4dLU5W"  --header "Content-Type:text/html; charset=utf-8" --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_3) AppleWebKit/585.20 (KHTML, like Gecko) Version/13.2 Safari/585.20"  -L  https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37
+
+OptanonAlertBoxClosed=2023-01-28T00:44:44.958Z; OptanonConsent=isGpcEnabled=0&datestamp=Thu+Feb+09+2023+22%3A30%3A50+GMT%2B0800+(%E4%B8%AD%E5%9B%BD%E6%A8%99%E6%BA%96%E6%99%82)&version=6.20.0&isIABGlobal=false&hosts=&consentId=fd1c7ee7-6385-47b3-beea-c6414c99a49a&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0004%3A0%2CC0003%3A0&geolocation=%3B&AwaitingReconsent=false; locale-country-data={"country":"de","locale":"de","language":"de"}; has_js=1; x-xsrf-token=cacc952a-9d20-4100-a4c1-fd7968be78fc; _fbp=fb.1.1675126851969.901561522; _ga=GA1.2.1300935900.1675126851; _ga_Y862HCHCQ7=GS1.1.1675775245.3.0.1675775251.0.0.0; ECOM_SESS=ehh6u3v51aghwh77vsrjpzm833; correlation_id=gg54phlnqyt2ll33gg4pw73qeqwo20og70346buh94xy8447eg1pwhkc1murn355; datadome=7XiaVTbSokPWPCpLRHigkftu-vdixNdc2FqTGvUjRMV69IVu50psnSEKTekNy9O-xA-RiZUHFoA6NfkeEgRbIl1mQfYEfNdbaviAtKFcGb0AgjrqZVWSCli77W4dLU5W
+
+--header "Content-Type:text/html; charset=utf-8" http://example.com
+
+text/html; charset=utf-8
