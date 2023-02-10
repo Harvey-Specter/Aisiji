@@ -80,6 +80,100 @@ function getTinyUrl(bigurl) {
   return rsObj.data.tiny_url
 }
 
+function putInCart() {
+  sleep(1000)
+  buttonClass = '.button-base.button-primary.size-large'
+  // console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
+  $(buttonClass).click()
+  sleep(2000)
+
+  location.href = 'https://www.hermes.com/de/de/cart/'
+}
+
+/**
+ * 监控详情页任务
+ * @param task
+ */
+function detailPageTask(task) {
+
+  var productUrls = ['https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC37/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC18/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK18/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK89/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/',
+    'https://www.hermes.com/de/de/product/tasche-cabas-h-en-biais-40-H082924CAAC/'
+  ]
+
+  // return getTinyUrl('https://stackoverflow.com/questions/6685249/jquery-performing-synchronous-ajax-requests')
+  console.log('dealTask=================0')
+  var baseUrl = 'https://www.hermes.com'
+  var productUrl = 'www.hermes.com/de/de/product'
+  var cartUrl = 'www.hermes.com/de/de/cart'
+  var checkoutUrl = 'www.hermes.com/de/de/checkout'
+  var payUrl = 'www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token'
+  var adyen = 'live.adyen.com/hpp/checkout'
+
+  var result = false
+  var nowTime = new Date().toLocaleString()
+  console.log(nowTime + "==" + task.name)
+  for (var i = 0; i < productUrls.length; i++) {
+    sleep(40000)
+    task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
+
+    if (location.href.indexOf(productUrl) < 0 && location.href.indexOf(cartUrl) < 0 && location.href.indexOf(checkoutUrl) < 0 &&
+      location.href.indexOf(payUrl) < 0 && location.href.indexOf(adyen) < 0 && location.href != task.url) {
+
+      location.href = task.url
+    } else if (location.href.indexOf(productUrl) >= 0) {
+      putInCart()
+    } else if (location.href.indexOf(cartUrl) >= 0) {
+
+      console.log('in cart sleep 3s')
+      sleep(2000)
+      $('.button-base.button-primary.size-large').click()
+
+    } else if (location.href.indexOf(checkoutUrl) >= 0) {
+      console.log('in checkout sleep 2s')
+      sleep(1000)
+      $('.button-base.button-primary.size-large').click()
+      sleep(500)
+      $('#radio-button-payment_method-1-input').click()
+      sleep(400)
+      $('#checkbox-gtc').click()
+      sleep(300)
+      $('.button-base.button-primary.size-large').click()
+    } else if (location.href.indexOf(payUrl) >= 0) {
+      var payUrl = location.href
+      console.log('payUrl====', payUrl)
+      return getTinyUrl(payUrl)
+      //return payUrl
+    } else {
+      var mainTitle = $(".main-title")
+      if (mainTitle && mainTitle.html().indexOf('Hoppla') >= 0) { //
+        console.log('没找到--')
+        task.result = nowTime + ' 没找到'
+        // if(taskNamesArray.length==1){
+        location.reload();
+        // }else{
+        //   continue
+        // }
+        result = false
+      } else {
+        console.log('ok')
+        task.result = nowTime + ' OK'
+        console.log($('.grid-container .product-item a:first').attr('href'))
+        var phref = $('.grid-container .product-item a:first').attr('href')
+        location.href = baseUrl + phref
+        result = true
+      }
+    }
+    if (result == true) {
+      return result
+    }
+  }
+  return result
+}
 /**
  * 处理任务
  * @param task
@@ -87,9 +181,14 @@ function getTinyUrl(bigurl) {
 function dealTask(task) {
 
   // return getTinyUrl('https://stackoverflow.com/questions/6685249/jquery-performing-synchronous-ajax-requests')
-
   console.log('dealTask=================0')
   var baseUrl = 'https://www.hermes.com'
+  var productUrl = 'www.hermes.com/de/de/product'
+  var cartUrl = 'www.hermes.com/de/de/cart'
+  var checkoutUrl = 'www.hermes.com/de/de/checkout'
+  var payUrl = 'www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token'
+  var adyen = 'live.adyen.com/hpp/checkout'
+
   var result = false
   var count = 1;
   // var timer = setInterval(function () {
@@ -101,30 +200,19 @@ function dealTask(task) {
   // sleep(4000)
   // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
 
-  if (location.href.indexOf('www.hermes.com/de/de/product') < 0 &&
-    location.href.indexOf('www.hermes.com/de/de/cart') < 0 &&
-    location.href.indexOf('www.hermes.com/de/de/checkout') < 0 &&
-    location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') < 0 &&
-    location.href.indexOf('live.adyen.com/hpp/checkout') < 0 &&
-    location.href != task.url) {
+  if (location.href.indexOf(productUrl) < 0 && location.href.indexOf(cartUrl) < 0 && location.href.indexOf(checkoutUrl) < 0 &&
+    location.href.indexOf(payUrl) < 0 && location.href.indexOf(adyen) < 0 && location.href != task.url) {
 
     location.href = task.url
-  } else if (location.href.indexOf('www.hermes.com/de/de/product') >= 0) {
-    sleep(1000)
-    // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-    // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-    console.log('button-base.button-primary.size-large====', $(".button-base.button-primary.size-large").html())
-    $(".button-base.button-primary.size-large").click()
-    sleep(2000)
-    location.href = 'https://www.hermes.com/de/de/cart/'
-  } else if (location.href.indexOf('www.hermes.com/de/de/cart') >= 0) {
+  } else if (location.href.indexOf(productUrl) >= 0) {
+    putInCart()
+  } else if (location.href.indexOf(cartUrl) >= 0) {
 
     console.log('in cart sleep 3s')
     sleep(2000)
     $('.button-base.button-primary.size-large').click()
 
-  } else if (location.href.indexOf('www.hermes.com/de/de/checkout') >= 0) {
-
+  } else if (location.href.indexOf(checkoutUrl) >= 0) {
     console.log('in checkout sleep 2s')
     sleep(1000)
     $('.button-base.button-primary.size-large').click()
@@ -134,9 +222,7 @@ function dealTask(task) {
     $('#checkbox-gtc').click()
     sleep(300)
     $('.button-base.button-primary.size-large').click()
-
-  } else if (location.href.indexOf('www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token') >= 0) {
-    // https: //www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token=EC-4LU49972UF121545S
+  } else if (location.href.indexOf(payUrl) >= 0) {
     var payUrl = location.href
     console.log('payUrl====', payUrl)
     return getTinyUrl(payUrl)
