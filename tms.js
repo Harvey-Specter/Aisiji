@@ -31,8 +31,32 @@ this.$ = this.jQuery = jQuery.noConflict(true);
 
     // if($('.title-large.ng-star-inserted').html()
     if (urlArray.indexOf().currUrl > -1) {
+      alert('已经进入官网指定商品页，点击确定开始任务')
+      for (var i = 0; i < urlArray.length; i++) {
+        sleep(30000);
+        if (currUrl != urlArray[i]) {
+          window.href = urlArray[i]
+        }
+        if ($('.title-large.ng-star-inserted').html().indexOf('Hoppla!') > -1) {
+          console.log('Hoppla! 没有货');
+        } else {
 
+        }
+        if (i == urlArray.length - 1) {
+          i = 0
+        }
+      }
     }
+
+  }
+
+  function buyFlow() {
+    console.log('WOW! 有货');
+    sleep(1000)
+    buttonClass = '.button-base.button-primary.size-large'
+    $(buttonClass).click()
+    sleep(2000)
+    location.href = 'https://www.hermes.com/de/de/cart/'
   }
 
   function sleep(delay) {
@@ -47,7 +71,6 @@ this.$ = this.jQuery = jQuery.noConflict(true);
 
   function test() {
     console.log('Ams_hello')
-    alert('已经进入官网，点击确定')
   }
 
 })();
