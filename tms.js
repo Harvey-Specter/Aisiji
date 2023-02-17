@@ -27,15 +27,15 @@ this.$ = this.jQuery = jQuery.noConflict(true);
   ]
 
   function doTask() {
-    var currUrl = window.href
-
+    var currUrl = location.href
+    console.log('currUrl====', currUrl)
     // if($('.title-large.ng-star-inserted').html()
-    if (urlArray.indexOf().currUrl > -1) {
+    if (urlArray.indexOf(currUrl) > -1) {
       alert('已经进入官网指定商品页，点击确定开始任务')
       for (var i = 0; i < urlArray.length; i++) {
         sleep(30000);
         if (currUrl != urlArray[i]) {
-          window.href = urlArray[i]
+          location.href = urlArray[i]
         }
         if ($('.title-large.ng-star-inserted').html().indexOf('Hoppla!') > -1) {
           console.log('Hoppla! 没有货');
@@ -67,7 +67,7 @@ this.$ = this.jQuery = jQuery.noConflict(true);
   }
   //  function loopUrls(){    }
 
-  test();
+  doTask();
 
   function test() {
     console.log('Ams_hello')
