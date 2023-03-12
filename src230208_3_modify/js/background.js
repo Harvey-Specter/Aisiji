@@ -89,7 +89,10 @@ function processTask(standerTime) {
               });
             }
             // if((new Date(tasks[i].killTime) - standerTime) >= 0 && (new Date(tasks[i].killTime) - standerTime) <= 600){
-            console.log(new Date(tasks[i].killTime) - standerTime); //43,860,983
+            console.log(
+              new Date().toLocaleString(),
+              new Date(tasks[i].killTime) - standerTime
+            ); //43,860,983
             if (new Date(tasks[i].killTime) - standerTime >= -86400000) {
               //异步执行点击事件
               var task = tasks[i];

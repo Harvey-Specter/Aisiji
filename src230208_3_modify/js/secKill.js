@@ -165,7 +165,7 @@ function dealTask(task) {
 
       //原来是刷新,现在改成返回首页,防止block
       //location.reload();
-      var delay = Math.random() * 20000 + 20000;
+      var delay = Math.random() * 10000 + 10000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
       // }else{
