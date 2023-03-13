@@ -1,6 +1,6 @@
 const readLocalTask = async () => {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get({ tasks: new Array() }, function (value) {
+    chrome.storage.local.get({ tasks: new Array() }, function(value) {
       tasks = value.tasks;
       resolve(tasks);
     });
@@ -36,7 +36,7 @@ async function secKill(taskId) {
     }
   }
   console.log(nowTime + "-即将返回----", result);
-  chrome.runtime.sendMessage(result, function (response) {
+  chrome.runtime.sendMessage(result, function(response) {
     console.log("sendMessage----", response); // Logs 'true'
   });
 
@@ -71,14 +71,14 @@ function getTinyUrl(bigurl) {
     // headers: {
     //   "Authorization": "Bearer " + btoa(USERNAME + ":" + PASSWORD)
     // },
-    beforeSend: function (xhr) {
+    beforeSend: function(xhr) {
       xhr.setRequestHeader(
         "Authorization",
         "Bearer NG7vRR87vgS4prlbsVWf0nLEOCoU8FdCTek0FMWqjEBQpcNF3iFLHgTfHB4E"
       );
     },
     data: { url: bigurl, domain: "tiny.one" },
-    success: function (rs) {
+    success: function(rs) {
       console.log("getTinyUrl===", rs);
     },
     dataType: "json",
@@ -165,7 +165,7 @@ function dealTask(task) {
 
       //原来是刷新,现在改成返回首页,防止block
       //location.reload();
-      var delay = Math.random() * 10000 + 10000;
+      var delay = Math.random() * 15000 + 8000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
       // }else{
