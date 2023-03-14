@@ -144,7 +144,7 @@ function dealTask(task) {
       location.href = "https://www.hermes.com/de/de/cart/";
     } else {
       //如果不存在返回首页重新再来
-      var delay = Math.random() * 15000 + 5000;
+      var delay = Math.random() * 15000 + 10000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
     }
