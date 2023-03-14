@@ -109,6 +109,13 @@ function dealTask(task) {
   // sleep(4000)
   // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
 
+  //随机取数组的一个元素
+  var urlArray = ['https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CK18/',
+    'https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/'
+  ]
+  //taskurl从搜索页改到详情页
+  task.url = urlArray[Math.floor((Math.random() * urlArray.length))];
+  console.log('task.url===' + task.url);
   if (
     location.href.indexOf("www.hermes.com/de/de/product") < 0 &&
     location.href.indexOf("www.hermes.com/de/de/cart") < 0 &&
@@ -122,15 +129,26 @@ function dealTask(task) {
     location.href = task.url;
   } else if (location.href.indexOf("www.hermes.com/de/de/product") >= 0) {
     sleep(1000);
-    // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
-    // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
-    console.log(
-      "button-base.button-primary.size-large====",
-      $(".button-base.button-primary.size-large").html()
-    );
-    $(".button-base.button-primary.size-large").click();
-    sleep(2000);
-    location.href = "https://www.hermes.com/de/de/cart/";
+    console.log('.button-base.button-primary.size-large--------', $(".button-base.button-primary.size-large").html());
+    // return
+    // 判断 .button-base.button-primary.size-large 是否存在
+    if ($(".button-base.button-primary.size-large").html() && $(".button-base.button-primary.size-large").html() != null && typeof $(".button-base.button-primary.size-large").html() != 'undefined') {
+      // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
+      // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
+      console.log(
+        "button-base.button-primary.size-large====",
+        $(".button-base.button-primary.size-large").html()
+      );
+      $(".button-base.button-primary.size-large").click();
+      sleep(2000);
+      location.href = "https://www.hermes.com/de/de/cart/";
+    } else {
+      //如果不存在返回首页重新再来
+      var delay = Math.random() * 15000 + 5000;
+      sleep(delay);
+      location.href = "https://www.hermes.com/de/de/";
+    }
+
   } else if (location.href.indexOf("www.hermes.com/de/de/cart") >= 0) {
     console.log("in cart sleep 3s");
     sleep(2000);
@@ -165,7 +183,7 @@ function dealTask(task) {
 
       //原来是刷新,现在改成返回首页,防止block
       //location.reload();
-      var delay = Math.random() * 15000 + 8000;
+      var delay = Math.random() * 15000 + 5000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
       // }else{
