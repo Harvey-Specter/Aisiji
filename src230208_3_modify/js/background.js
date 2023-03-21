@@ -124,7 +124,11 @@ function processTask(standerTime) {
                     console.log("executeScript-result==", result); // Logs true
 
                     if (result == true) {
-                      // clearInterval(thisTimer);
+                      //console.log('暂时结束循环-以后要注释掉')
+                      console.log('暂时结束循环-以后要注释掉')
+                      clearInterval(thisTimer);
+                      //------------------
+
                       console.log("查到了");
                       var opt = {
                         type: "basic",
@@ -159,7 +163,7 @@ function processTask(standerTime) {
         }
       }
     });
-  }, Math.random() * 25000 + 15000);
+  }, Math.random() * 30000 + 15000);
   if (oldTimer != null) {
     clearInterval(oldTimer);
   }

@@ -109,6 +109,18 @@ function dealTask(task) {
   // sleep(4000)
   // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
 
+  //console.log($('iframe').contentWindow.document.find('#captcha-container'))
+  var captchaIframe = $("iframe")
+  // console.log('#captcha-container--html--', captcha_container.html());
+
+  console.log('captchaIframe--', captchaIframe, captchaIframe.length);
+  // return true
+
+  if (captchaIframe.length == 1) {
+    console.log('出现拼图')
+    return true
+  }
+
   //随机取数组的一个元素
   var urlArray = ['https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CK18/',
     'https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/'
@@ -116,13 +128,12 @@ function dealTask(task) {
   //taskurl从搜索页改到详情页
   task.url = urlArray[Math.floor((Math.random() * urlArray.length))];
   console.log('task.url===' + task.url);
+
   if (
     location.href.indexOf("www.hermes.com/de/de/product") < 0 &&
     location.href.indexOf("www.hermes.com/de/de/cart") < 0 &&
     location.href.indexOf("www.hermes.com/de/de/checkout") < 0 &&
-    location.href.indexOf(
-      "www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token"
-    ) < 0 &&
+    location.href.indexOf("www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token") < 0 &&
     location.href.indexOf("live.adyen.com/hpp/checkout") < 0 &&
     location.href != task.url
   ) {
@@ -144,7 +155,7 @@ function dealTask(task) {
       location.href = "https://www.hermes.com/de/de/cart/";
     } else {
       //如果不存在返回首页重新再来
-      var delay = Math.random() * 15000 + 10000;
+      var delay = Math.random() * 22000 + 10000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
     }
