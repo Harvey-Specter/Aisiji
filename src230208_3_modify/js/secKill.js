@@ -116,7 +116,7 @@ function dealTask(task) {
   console.log('captchaIframe--', captchaIframe, captchaIframe.length);
   // return true
 
-  if (captchaIframe.length == 1) {
+  if (captchaIframe.length >= 1 && captchaIframe[0].title != 'onetrust-text-resize') {
     console.log('出现拼图')
     return true
   }
