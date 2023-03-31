@@ -123,7 +123,13 @@ function dealTask(task) {
 
   //随机取数组的一个元素
   var urlArray = ['https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CK18/',
-    'https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/'
+    'https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC37/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC18/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK18/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK89/',
+    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/'
   ]
   //taskurl从搜索页改到详情页
   task.url = urlArray[Math.floor((Math.random() * urlArray.length))];
@@ -141,6 +147,13 @@ function dealTask(task) {
   } else if (location.href.indexOf("www.hermes.com/de/de/product") >= 0) {
     sleep(1000);
     console.log('.button-base.button-primary.size-large--------', $(".button-base.button-primary.size-large").html());
+
+    if ($(".message-info").html() && $(".message-info").html().indexOf('Hoppla! Leider ist der gewählte Artikel nicht mehr verfügbar') > -1) { //
+      console.log('详情页显示没有货，即将返回首页');
+      location.href = "https://www.hermes.com/de/de/"
+      return
+    }
+
     // return
     // 判断 .button-base.button-primary.size-large 是否存在
     if ($(".button-base.button-primary.size-large").html() && $(".button-base.button-primary.size-large").html() != null && typeof $(".button-base.button-primary.size-large").html() != 'undefined') {

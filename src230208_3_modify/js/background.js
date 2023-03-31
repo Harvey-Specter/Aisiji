@@ -163,7 +163,7 @@ function processTask(standerTime) {
         }
       }
     });
-  }, Math.random() * 30000 + 15000);
+  }, Math.random() * 35000 + 15000);
   if (oldTimer != null) {
     clearInterval(oldTimer);
   }
