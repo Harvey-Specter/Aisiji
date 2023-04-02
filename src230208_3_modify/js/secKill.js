@@ -1,6 +1,6 @@
 const readLocalTask = async () => {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get({ tasks: new Array() }, function(value) {
+    chrome.storage.local.get({ tasks: new Array() }, function (value) {
       tasks = value.tasks;
       resolve(tasks);
     });
@@ -36,7 +36,7 @@ async function secKill(taskId) {
     }
   }
   console.log(nowTime + "-即将返回----", result);
-  chrome.runtime.sendMessage(result, function(response) {
+  chrome.runtime.sendMessage(result, function (response) {
     console.log("sendMessage----", response); // Logs 'true'
   });
 
@@ -71,14 +71,14 @@ function getTinyUrl(bigurl) {
     // headers: {
     //   "Authorization": "Bearer " + btoa(USERNAME + ":" + PASSWORD)
     // },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader(
         "Authorization",
         "Bearer NG7vRR87vgS4prlbsVWf0nLEOCoU8FdCTek0FMWqjEBQpcNF3iFLHgTfHB4E"
       );
     },
     data: { url: bigurl, domain: "tiny.one" },
-    success: function(rs) {
+    success: function (rs) {
       console.log("getTinyUrl===", rs);
     },
     dataType: "json",
@@ -96,7 +96,8 @@ function getTinyUrl(bigurl) {
 function dealTask(task) {
   // return getTinyUrl('https://stackoverflow.com/questions/6685249/jquery-performing-synchronous-ajax-requests')
 
-  console.log("dealTask=================0");
+  localStorage.setItem("key", "value");
+  console.log("dealTask=================0", sessionStorage, localStorage);
   var baseUrl = "https://www.hermes.com";
   var result = false;
   var count = 1;
@@ -110,53 +111,74 @@ function dealTask(task) {
   // task.url = "https://www.hermes.com/de/de/search/?s=" + encodeURI(taskNamesArray[i]) + "#|"
 
   //console.log($('iframe').contentWindow.document.find('#captcha-container'))
-  var captchaIframe = $("iframe")
+  var captchaIframe = $("iframe");
   // console.log('#captcha-container--html--', captcha_container.html());
 
-  console.log('captchaIframe--', captchaIframe, captchaIframe.length);
+  console.log("captchaIframe--", captchaIframe, captchaIframe.length);
   // return true
 
-  if (captchaIframe.length >= 1 && captchaIframe[0].title != 'onetrust-text-resize') {
-    console.log('出现拼图')
-    return true
+  if (
+    captchaIframe.length >= 1 &&
+    captchaIframe[0].title != "onetrust-text-resize"
+  ) {
+    console.log("出现拼图");
+    return true;
   }
 
   //随机取数组的一个元素
-  var urlArray = ['https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CK18/',
-    'https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC37/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC18/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK18/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK89/',
-    'https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/'
-  ]
+  var urlArray = [
+    "https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CK18/",
+    "https://www.hermes.com/de/de/product/tasche-picotin-lock-18-H056289CC18/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK37/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC37/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC18/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK18/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CK89/",
+    "https://www.hermes.com/de/de/product/tasche-evelyne-iii-29-H056277CC89/",
+  ];
   //taskurl从搜索页改到详情页
-  task.url = urlArray[Math.floor((Math.random() * urlArray.length))];
-  console.log('task.url===' + task.url);
+  task.url = urlArray[Math.floor(Math.random() * urlArray.length)];
+  console.log("task.url===" + task.url);
 
   if (
     location.href.indexOf("www.hermes.com/de/de/product") < 0 &&
     location.href.indexOf("www.hermes.com/de/de/cart") < 0 &&
     location.href.indexOf("www.hermes.com/de/de/checkout") < 0 &&
-    location.href.indexOf("www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token") < 0 &&
+    location.href.indexOf(
+      "www.paypal.com/cgi-bin/webscr?useraction=commit&cmd=_express-checkout&token"
+    ) < 0 &&
     location.href.indexOf("live.adyen.com/hpp/checkout") < 0 &&
     location.href != task.url
   ) {
     location.href = task.url;
   } else if (location.href.indexOf("www.hermes.com/de/de/product") >= 0) {
     sleep(1000);
-    console.log('.button-base.button-primary.size-large--------', $(".button-base.button-primary.size-large").html());
+    console.log(
+      ".button-base.button-primary.size-large--------",
+      $(".button-base.button-primary.size-large").html()
+    );
 
-    if ($(".message-info").html() && $(".message-info").html().indexOf('Hoppla! Leider ist der gewählte Artikel nicht mehr verfügbar') > -1) { //
-      console.log('详情页显示没有货，即将返回首页');
-      location.href = "https://www.hermes.com/de/de/"
-      return
+    if (
+      $(".message-info").html() &&
+      $(".message-info")
+        .html()
+        .indexOf(
+          "Hoppla! Leider ist der gewählte Artikel nicht mehr verfügbar"
+        ) > -1
+    ) {
+      //
+      console.log("详情页显示没有货，即将返回首页");
+      location.href = "https://www.hermes.com/de/de/";
+      return;
     }
 
     // return
     // 判断 .button-base.button-primary.size-large 是否存在
-    if ($(".button-base.button-primary.size-large").html() && $(".button-base.button-primary.size-large").html() != null && typeof $(".button-base.button-primary.size-large").html() != 'undefined') {
+    if (
+      $(".button-base.button-primary.size-large").html() &&
+      $(".button-base.button-primary.size-large").html() != null &&
+      typeof $(".button-base.button-primary.size-large").html() != "undefined"
+    ) {
       // console.log('formHtml====', $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').html())
       // $('.simple-product-selector.ng-untouched.ng-pristine.ng-valid').submit()
       console.log(
@@ -172,7 +194,6 @@ function dealTask(task) {
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
     }
-
   } else if (location.href.indexOf("www.hermes.com/de/de/cart") >= 0) {
     console.log("in cart sleep 3s");
     sleep(2000);
