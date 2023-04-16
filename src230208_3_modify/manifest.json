@@ -8,6 +8,7 @@
     "128": "image/seckill-128.png"
   },
   "permissions": [
+    "browsingData",
     "tabs",
     "storage",
     "webNavigation",

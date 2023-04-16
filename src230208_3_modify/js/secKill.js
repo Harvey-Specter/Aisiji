@@ -190,9 +190,9 @@ function dealTask(task) {
       location.href = "https://www.hermes.com/de/de/cart/";
     } else {
       //如果不存在返回首页重新再来
-      var delay = Math.random() * 22000 + 10000;
-      sleep(delay);
-      location.href = "https://www.hermes.com/de/de/";
+      // var delay = Math.random() * 5000 + 5000;
+      // sleep(delay);
+      location.href = task.url; // "https://www.hermes.com/de/de/";
     }
   } else if (location.href.indexOf("www.hermes.com/de/de/cart") >= 0) {
     console.log("in cart sleep 3s");
@@ -228,7 +228,7 @@ function dealTask(task) {
 
       //原来是刷新,现在改成返回首页,防止block
       //location.reload();
-      var delay = Math.random() * 15000 + 5000;
+      var delay = Math.random() * 15000 + 10000;
       sleep(delay);
       location.href = "https://www.hermes.com/de/de/";
       // }else{

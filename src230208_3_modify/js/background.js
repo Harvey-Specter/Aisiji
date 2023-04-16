@@ -20,11 +20,43 @@ chrome.extension.onConnect.addListener(function (port) {
   });
 });
 
+var callback = function () {
+  // Do something clever here once data has been removed.
+  console.log("clear all cache finish");
+};
+
+function clearCache(weeks) {
+  var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 7 * weeks;
+  var tenWeekAgo = new Date().getTime() - millisecondsPerWeek;
+  // console.log("chrome---", chrome);
+  chrome.browsingData.remove(
+    {
+      since: tenWeekAgo,
+    },
+    {
+      appcache: true,
+      cache: true,
+      cacheStorage: true,
+      cookies: true,
+      downloads: true,
+      fileSystems: true,
+      formData: true,
+      history: true,
+      indexedDB: true,
+      localStorage: true,
+      passwords: true,
+      serviceWorkers: true,
+      webSQL: true,
+    },
+    callback
+  );
+}
 /**
  * 每隔500ms去检查任务,异步处理任务
  */
 function processTask(standerTime) {
   console.log("后端开启轮寻任务---------！");
+
   var timer = setInterval(function () {
     standerTime += 500;
     chrome.storage.local.get({ tasks: new Array() }, function (value) {
@@ -109,7 +141,7 @@ function processTask(standerTime) {
                   }
                 }
                 var thisTimer = timer;
-
+                clearCache(10);
                 chrome.tabs.executeScript(
                   tabId,
                   { code: "secKill(" + task.id + ");" },
@@ -167,7 +199,7 @@ function processTask(standerTime) {
         }
       }
     });
-  }, Math.random() * 25000 + 20000);
+  }, Math.random() * 10000 + 10000);
   if (oldTimer != null) {
     clearInterval(oldTimer);
   }
